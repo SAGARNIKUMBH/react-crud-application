@@ -22,3 +22,8 @@ code {
   display: flex;
   align-items: center;
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}

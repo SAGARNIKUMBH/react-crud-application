@@ -6,6 +6,8 @@ import Navbar from "./Components/Navbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NotFound from "./Components/NotFound";
 import AddUser from "./Components/AddUser";
+import EditUser from "./Components/EditUser";
+import ViewUser from "./Components/ViewUser";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
             <Route exact path="/about" component={About} />
             <Route exact path="/contact" component={Contact} />
             <Route exact path="/users/add" component={AddUser} />
+            <Route exact path="/users/edit/:id" component={EditUser} />
+            <Route exact path="/users/:id" component={ViewUser} />
             <Route component={NotFound} />
           </Switch>
         </div>
