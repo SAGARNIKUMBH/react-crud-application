@@ -1,6 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
+import axios from "axios";
 function Navbar() {
+  const [search, setNewSearch] = useState("");
+  const [userData, setUserData] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+  const users = async () => {
+    const result = await axios.get("http://localhost:3003/users");
+    setUserData(result.data);
+  };
+  console.log("searchData", search);
+  const handleSearchChange = (e) => {
+    setNewSearch(e.target.value);
+  };
+
+  useEffect(() => {
+    users();
+    const filtered = !search
+      ? userData
+      : userData.filter((person) =>
+          person.name.toLowerCase().includes(search.toLowerCase())
+        );
+    setFiltered(filtered);
+  }, [search]);
+
+  console.log(filtered);
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -37,17 +61,16 @@ function Navbar() {
                 </NavLink>
               </li>
             </ul>
-            <form className="d-flex">
+            <div className="d-flex">
               <input
                 className="form-control me-2"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                onChange={handleSearchChange}
+                value={search}
               />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form>
+            </div>
           </div>
         </div>
       </nav>

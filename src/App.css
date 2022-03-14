@@ -7,12 +7,6 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -28,6 +22,75 @@
   color: #61dafb;
 }
 
+.btn-primary {
+  float: right;
+  margin-right: 25px;
+}
+
+.page-link {
+  color: black;
+  font-weight: bold;
+}
+
+.page-item disabled {
+  color: black;
+  font-weight: bold;
+}
+
+.fa-eye {
+  font-size: 20px;
+  color: #007bff;
+  padding-top: 8px;
+  padding-right: 20px;
+}
+
+.fa-pen-to-square {
+  font-size: 20px;
+  /* position: absolute; */
+  padding-top: 8px;
+  color: #007bff;
+  padding-right: 20px;
+}
+
+.fa-trash-can {
+  font-size: 20px;
+  /* position: absolute; */
+  padding-top: 8px;
+  color: red;
+  padding-right: 0px;
+}
+
+.pagination {
+  display: inline-table;
+}
+
+.pagination a {
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #4caf50;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: rgb(126, 184, 250);
+}
+
+.error {
+  color: red;
+  box-shadow: none;
+  border-color: black;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -37,7 +100,13 @@
   }
 }
 
-.form-label {
+.form-control-lg {
+  border-color: red;
+  border: black;
+}
+
+.img-fluid {
+  height: 400px !important;
   display: flex;
-  text-align: start;
+  margin-left: 80px;
 }

@@ -2,9 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import ResizableTable from "./Resizer";
+import Pagination from "./Pagination";
 
 function Home() {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [CurrentPage, setCurrentPage] = useState(1);
+  const [usersPerPage] = useState(5);
 
   useEffect(() => {
     loadUsers();
@@ -12,8 +16,10 @@ function Home() {
   }, []);
 
   const loadUsers = async () => {
+    setLoading(true);
     const result = await axios.get("http://localhost:3003/users");
     setUsers(result.data.reverse());
+    setLoading(false);
   };
 
   const deleteUser = async (id) => {
@@ -21,15 +27,26 @@ function Home() {
     loadUsers();
   };
 
+  const indexOfLastPost = CurrentPage * usersPerPage;
+  const indexOfFirstPost = indexOfLastPost - usersPerPage;
+  const currentPosts = users.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className="container ">
-      <br />
-      <Link className="btn btn-primary " to="/users/add">
-        Add User
-      </Link>
       <div className="py-3">
-        <h1>Admin Page </h1>
-        <br />
+        <header>
+          <div className="container">
+            <h1 className="headerTitle">
+              Admin DashBoard
+              <Link className="btn btn-primary " to="/users/add">
+                <i className="fas fa-user-plus"></i>
+              </Link>
+            </h1>
+          </div>
+        </header>
+
         <table className="table border shadow">
           {/* <ResizableTable resizable={true} resizeOptions={{}}> */}
 
@@ -45,7 +62,7 @@ function Home() {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => {
+            {currentPosts.map((user, index) => {
               return (
                 <tr key={index}>
                   <td scope="row">{index + 1}</td>
@@ -56,22 +73,22 @@ function Home() {
                   <td>{user.website}</td>
                   <td>
                     <Link
-                      className="btn btn-primary m-1"
+                      // className="btn btn-primary m-1"
                       to={`/users/${user.id}`}
                     >
-                      View
+                      <i className="fa fab-duotone fa-eye"></i>
                     </Link>
                     <Link
-                      className="btn btn-outline-primary m-1"
+                      // className="btn btn-outline-primary m-1"
                       to={`/users/edit/${user.id}`}
                     >
-                      Edit
+                      <i className="fa fab-duotone fa-pen-to-square"></i>
                     </Link>
                     <Link
-                      className="btn btn-danger"
+                      // className="btn btn-danger"
                       onClick={() => deleteUser(user.id)}
                     >
-                      Delete
+                      <i className="fa fab-duotone fa-trash-can"></i>
                     </Link>
                   </td>
                 </tr>
@@ -81,23 +98,13 @@ function Home() {
           {/* </ResizableTable> */}
         </table>
       </div>
-
-      <div className="container d-flex justify-content-between">
-        <button
-          type="button"
-          className="btn btn-dark"
-          // onClick={this.handleprevClick}
-        >
-          &larr; Previous
-        </button>
-        <button
-          type="button"
-          className="btn btn-dark"
-          // onClick={this.handleNextClick}
-        >
-          Next &rarr;
-        </button>
-      </div>
+      <Pagination
+        userPerPage={usersPerPage}
+        totalPosts={users.length}
+        paginate={paginate}
+        CurrentPage={CurrentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 }

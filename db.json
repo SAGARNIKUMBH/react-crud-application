@@ -28,7 +28,7 @@
       "username": "Sagar",
       "email": "sagarnikumbh.weoto1991@gmail.com",
       "phone": "9923904141",
-      "website": "Weoto",
+      "website": "SpaceX Launch Apps",
       "id": 5
     },
     {
@@ -60,7 +60,7 @@
       "username": "Pk",
       "email": "pk@gmail.com",
       "phone": "7894561235",
-      "website": "Nextus",
+      "website": "Nexus",
       "id": 9
     },
     {
@@ -72,12 +72,28 @@
       "id": 10
     },
     {
-      "name": "Pritesh Bavaskar",
-      "username": "PB",
-      "email": "pb@gmail.com",
+      "name": "sagar",
+      "username": "Sagar",
+      "email": "sagar.nikumbh2011@gmail.com",
+      "phone": "9874561232",
+      "website": "Connect2Clinic",
+      "id": 11
+    },
+    {
+      "name": "sagar nikumbh",
+      "username": "Rk",
+      "email": "rk@gmail.com",
       "phone": "7412589632",
       "website": "Vu.js",
-      "id": 11
+      "id": 12
+    },
+    {
+      "name": "sagar",
+      "username": "pn",
+      "email": "sagar@gmail.com",
+      "phone": "8521472145",
+      "website": "sjkdjd",
+      "id": 13
     }
   ]
 }
