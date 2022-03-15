@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import axios from "axios";
-function Navbar() {
+import LoginForm from "./LoginForm";
+function Navbar({ getSreach }) {
   const [search, setNewSearch] = useState("");
   const [userData, setUserData] = useState([]);
   const [filtered, setFiltered] = useState([]);
@@ -11,6 +12,7 @@ function Navbar() {
   };
   console.log("searchData", search);
   const handleSearchChange = (e) => {
+    getSreach(e.target.value);
     setNewSearch(e.target.value);
   };
 
@@ -71,7 +73,20 @@ function Navbar() {
                 value={search}
               />
             </div>
+            <br />
           </div>
+        </div>
+        <div className="mr-3 align-self-center">
+          <img
+            src="https://img.icons8.com/fluency/344/guest-male.png"
+            style={{
+              height: "41px",
+              width: "41px",
+              marginRight: "15px",
+              id: "imgClickAndChange",
+              onclick: { LoginForm },
+            }}
+          />
         </div>
       </nav>
     </div>

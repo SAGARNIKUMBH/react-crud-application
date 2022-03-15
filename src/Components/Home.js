@@ -4,23 +4,34 @@ import { Link } from "react-router-dom";
 import ResizableTable from "./Resizer";
 import Pagination from "./Pagination";
 
-function Home() {
+function Home(props) {
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [CurrentPage, setCurrentPage] = useState(1);
   const [usersPerPage] = useState(5);
 
   useEffect(() => {
     loadUsers();
-    console.log("Hello everyone");
+    console.log("called");
   }, []);
 
+  useEffect(() => {
+    console.log("condition ", users);
+    const filtered =
+      props.dataSreach === ""
+        ? users
+        : users.filter((person) =>
+            person.name.toLowerCase().includes(props.dataSreach.toLowerCase())
+          );
+    console.log("filtered", filtered);
+    setUsers(filtered);
+  }, [props.dataSreach]);
+
   const loadUsers = async () => {
-    setLoading(true);
     const result = await axios.get("http://localhost:3003/users");
     setUsers(result.data.reverse());
-    setLoading(false);
   };
+
+  console.log("users ", users);
 
   const deleteUser = async (id) => {
     await axios.delete(`http://localhost:3003/users/${id}`);
